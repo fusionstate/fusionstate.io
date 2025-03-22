@@ -1,61 +1,25 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import SocialList from "@/components/SocialList.astro";
-import PostPreview from "@/components/blog/PostPreview.astro";
-import Note from "@/components/note/Note.astro";
-import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
-import { collectionDateSort } from "@/utils/date";
-
-// Posts
-const MAX_POSTS = 10;
-const allPosts = await getAllPosts();
-const allPostsByDate = allPosts
-	.sort(collectionDateSort)
-	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
-
-// Notes
-const MAX_NOTES = 5;
-const allNotes = await getCollection("note");
-const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 ---
 
 <PageLayout meta={{ title: "Home" }}>
 	<section>
-		<h1 class="title mb-6">Hello World!</h1>
-		<p class="mb-4">
-			Hi, I’m a theme for Astro, a simple starter that you can use to create your website or blog.
-			If you want to know more about how you can customise me, add more posts, and make it your own,
-			click on the GitHub icon link below and it will take you to my repo.
+		<h1 class="title mb-10">Scalable data layer for reactive applications</h1>
+		<p class="mb-4 text-base">
+			<span class="font-bold">Scalable -</span> FusionState supports the industrial development of large-scale
+			distributed systems. It simplifies the adoption of proven patterns like CQRS and helps you move
+			fast without sacrificing quality.
 		</p>
-		<SocialList />
+		<p class="mb-4 text-base">
+			<span class="font-bold">Data Layer -</span> FusionState is built as a layer on top of the popular
+			key-value store <a href="https://www.foundationdb.org/" target="_blank" class="cactus-link"
+				>FoundationDB</a
+			>. You can combine CDC streams from differencet sources into one consolidated multi-model data
+			store.
+		</p>
+		<p class="mb-4 text-base">
+			<span class="font-bold">Reactive -</span> FusionState makes it easy to build reactive and real-time
+			applications. Clients can subscribe to keys or queries and get notified on relevant database changes.
+		</p>
 	</section>
-	<section class="mt-16">
-		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
-		<ul class="space-y-4" role="list">
-			{
-				allPostsByDate.map((p) => (
-					<li class="grid gap-2 sm:grid-cols-[auto_1fr]">
-						<PostPreview post={p} />
-					</li>
-				))
-			}
-		</ul>
-	</section>
-	{
-		latestNotes.length > 0 && (
-			<section class="mt-16">
-				<h2 class="title text-accent mb-6 text-xl">
-					<a href="/notes/">Notes</a>
-				</h2>
-				<ul class="space-y-4" role="list">
-					{latestNotes.map((note) => (
-						<li>
-							<Note note={note} as="h3" isPreview />
-						</li>
-					))}
-				</ul>
-			</section>
-		)
-	}
 </PageLayout>
