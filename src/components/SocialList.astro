@@ -20,7 +20,7 @@ const socialLinks: {
 ];
 ---
 
-<div class="flex flex-wrap items-end ms-2 sm:ms-4">
+<div class="flex flex-wrap items-end">
 	<ul class="flex flex-1 items-center sm:flex-initial">
 		{
 			socialLinks.map(({ friendlyName, isWebmention, link, name }) => (
@@ -31,7 +31,12 @@ const socialLinks: {
 						rel={`noreferrer ${isWebmention ? "me authn" : ""}`}
 						target="_blank"
 					>
-						<Icon aria-hidden="true" class="h-8 w-8 hover:text-accent" focusable="false" name={name} />
+						<Icon
+							aria-hidden="true"
+							class="hover:text-accent ms-2 h-9 w-9 p-1 sm:ms-4"
+							focusable="false"
+							name={name}
+						/>
 						<span class="sr-only">{friendlyName}</span>
 					</a>
 				</li>
